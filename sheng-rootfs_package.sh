@@ -28,13 +28,15 @@ chroot rootdir dpkg -i linux-xiaomi-sheng.deb
 rm -rf $1/rootdir/*.deb
 
 # Tambah user
-chroot rootdir useradd -m -s /bin/bash ubuntu
+chroot rootdir useradd -m -s /bin/bash admin
+chroot rootdir useradd -m -s /bin/bash root
 
 # Set password
-chroot rootdir /bin/bash -c "echo 'ubuntu:147147' | chpasswd"
+chroot rootdir /bin/bash -c "echo 'admin:147147' | chpasswd"
+chroot rootdir /bin/bash -c "echo 'root:root' | chpasswd"
 
 # Tambah ke grup sudo
-chroot rootdir usermod -aG sudo ubuntu
+chroot rootdir usermod -aG sudo admin
 
 
 umount rootdir/sys
