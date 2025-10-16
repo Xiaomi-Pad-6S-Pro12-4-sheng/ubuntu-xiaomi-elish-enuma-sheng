@@ -31,7 +31,8 @@ export DEBIAN_FRONTEND=noninteractive
 chroot rootdir apt update
 chroot rootdir apt upgrade -y
 chroot rootdir apt install -y python3-defer
-
+chroot rootdir apt-get install language-pack-zh-hans language-pack-zh-hans-base
+chroot rootdir  update-locale LANG=zh_CN.UTF-8 LANGUAGE=zh_CN:zh
 echo "#!/bin/bash
 exit 0" | tee rootdir/var/lib/dpkg/info/python3-defer.postinst
 chroot rootdir dpkg --configure python3-defer
