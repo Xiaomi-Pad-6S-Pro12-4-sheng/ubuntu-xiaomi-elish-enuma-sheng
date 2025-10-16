@@ -1,4 +1,4 @@
-name: rootfs-ubuntu-desktop
+name: rootfs-ubuntu-ukui
 
 on:
   workflow_dispatch:
@@ -36,7 +36,7 @@ jobs:
     timeout-minutes: 20
     strategy:
             matrix:
-                desktop: [openKylin-desktop]
+                desktop: [ukui-desktop-environment]
     steps:
       - uses: actions/checkout@v4
       - name: Install Dependencies
@@ -106,7 +106,7 @@ jobs:
     timeout-minutes: 10
     strategy:
             matrix:
-                desktop: [openKylin-desktop]
+                desktop: [ukui-desktop-environment]
                 kernel: [6.15]
     steps:
       - uses: actions/checkout@v4
