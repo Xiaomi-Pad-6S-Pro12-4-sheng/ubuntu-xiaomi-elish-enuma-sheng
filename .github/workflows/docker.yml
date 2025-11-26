@@ -9,7 +9,7 @@ jobs:
     timeout-minutes: 20
     strategy:
             matrix:
-                version: [6.15.1]
+                version: [sheng-6.15-nanosic-led]
     steps:
       - uses: actions/checkout@v4
 
@@ -107,7 +107,7 @@ jobs:
     strategy:
             matrix:
                 desktop: [ubuntu-desktop]
-                kernel: [6.15.1]
+                kernel: [sheng-6.15-nanosic-led]
     steps:
       - uses: actions/checkout@v4
       - uses: actions/download-artifact@v4
