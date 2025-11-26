@@ -9,7 +9,7 @@ truncate -s 5G rootfs.img
 mkfs.ext4 rootfs.img
 mkdir rootdir
 mount -o loop rootfs.img rootdir
-
+# 下载并解压 Ubuntu Base 25.10 镜像
 wget https://cdimage.ubuntu.com/ubuntu-base/releases/$VERSION/release/ubuntu-base-$VERSION-base-arm64.tar.gz
 tar xzvf ubuntu-base-$VERSION-base-arm64.tar.gz -C rootdir
 
@@ -31,8 +31,14 @@ export DEBIAN_FRONTEND=noninteractive
 chroot rootdir apt update
 chroot rootdir apt upgrade -y
 chroot rootdir apt install -y python3-defer
-chroot rootdir apt-get install language-pack-zh-hans language-pack-zh-hans-base
-chroot rootdir update-locale LANG=zh_CN.UTF-8
+# 安装中文语言包和输入法支持
+chroot rootdir apt-get install -y language-pack-zh-hans language-pack-zh-hans-base
+chroot rootdir apt-get install -y fonts-wqy-zenhei fonts-wqy-microhei language-pack-gnome-zh-hans
+chroot rootdir apt-get install -y ibus-libpinyin ibus-pinyin
+chroot rootdir update-locale LANG=zh_CN.UTF-8 LC_ALL=zh_CN.UTF-8
+# 配置默认语言环境
+echo 'LANG="zh_CN.UTF-8"' > rootdir/etc/default/locale
+echo 'LC_ALL="zh_CN.UTF-8"' >> rootdir/etc/default/locale
 echo "#!/bin/bash
 exit 0" | tee rootdir/var/lib/dpkg/info/python3-defer.postinst
 chroot rootdir dpkg --configure python3-defer
