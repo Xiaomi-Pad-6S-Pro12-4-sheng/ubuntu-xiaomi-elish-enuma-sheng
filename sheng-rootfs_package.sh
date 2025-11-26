@@ -22,9 +22,10 @@ find $1/.. -name 'firmware-xiaomi-sheng.deb' -exec cp "{}" $1/rootdir/  \;
 find $1/.. -name 'device-xiaomi-sheng.deb' -exec cp "{}" $1/rootdir/  \;
 find $1/.. -name 'linux-xiaomi-sheng.deb' -exec cp "{}" $1/rootdir/ \;
 chroot rootdir sudo apt update
-chroot rootdir sudo apt install -y language-pack-zh-hans
-chroot rootdir sudo locale-gen zh_CN.UTF-8
+chroot rootdir sudo apt install -y language-pack-zh-hans language-pack-zh-hant
+chroot rootdir sudo locale-gen zh_CN.UTF-8 zh_TW.UTF-8
 chroot rootdir echo 'LANG="zh_CN.UTF-8"' | sudo tee /etc/default/locale
+chroot rootdir echo 'LANGUAGE="zh_CN:zh"' | sudo tee -a /etc/default/locale
 chroot rootdir apt update
 chroot rootdir apt upgrade -y
 chroot rootdir apt install -y python3-defer
