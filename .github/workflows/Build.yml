@@ -1,4 +1,4 @@
-name: rootfs-ubuntu-ukui
+name: rootfs-ubuntu
 
 on:
   workflow_dispatch:
