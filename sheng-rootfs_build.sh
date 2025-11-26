@@ -1,6 +1,6 @@
 #!/bin/sh
 VERSION="24.04.3"
-VERSION="25.10"
+#VERSION="25.10"
 
 
 cd $2
