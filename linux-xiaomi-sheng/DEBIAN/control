@@ -1,5 +1,5 @@
 Package: linux-xiaomi-sheng
-Version: sheng-6.15-upd
+Version: sheng-6.15.x
 Architecture: arm64
 Maintainer: alghiffaryfa19
 Section: kernel
