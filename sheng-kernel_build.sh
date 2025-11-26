@@ -2,8 +2,8 @@ cd $1
 git clone https://github.com/Xiaomi-Pad-6S-Pro12-4-sheng/sm8550-mainline --depth 1 linux --branch sheng-$2
 cd linux
 
-make -j$(nproc) ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- defconfig sm8550-docker.config
-#make -j$(nproc) ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- defconfig sm8550.config
+#make -j$(nproc) ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- defconfig sm8550-docker.config
+make -j$(nproc) ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- defconfig sm8550.config
 make -j$(nproc) ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu-
 _kernel_version="$(make kernelrelease -s)"
 sed -i "s/Version:.*/Version: ${_kernel_version}/" $1/linux-xiaomi-sheng/DEBIAN/control
