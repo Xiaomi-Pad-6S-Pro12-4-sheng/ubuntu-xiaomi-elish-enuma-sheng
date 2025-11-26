@@ -1,4 +1,4 @@
-name: rootfs-ubuntu
+name: rootfs-ubuntu-sheng-6.15-upd
 
 on:
   workflow_dispatch:
