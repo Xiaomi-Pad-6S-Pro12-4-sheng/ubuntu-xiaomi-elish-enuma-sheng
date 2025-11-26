@@ -1,4 +1,4 @@
-name: rootfs-ubuntu-desktop
+name: rootfs-docker
 
 on:
   workflow_dispatch:
