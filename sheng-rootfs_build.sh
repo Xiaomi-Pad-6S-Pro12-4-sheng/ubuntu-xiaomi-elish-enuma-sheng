@@ -31,21 +31,17 @@ export DEBIAN_FRONTEND=noninteractive
 chroot rootdir apt update
 chroot rootdir apt upgrade -y
 chroot rootdir apt install -y python3-defer
-# 安装中文语言包和输入法支持
-chroot rootdir apt-get install -y language-pack-zh-hans language-pack-zh-hans-base
-chroot rootdir apt-get install -y fonts-wqy-zenhei fonts-wqy-microhei language-pack-gnome-zh-hans
-chroot rootdir apt-get install -y ibus-libpinyin ibus-pinyin
-chroot rootdir update-locale LANG=zh_CN.UTF-8 LC_ALL=zh_CN.UTF-8
-# 配置默认语言环境
-echo 'LANG="zh_CN.UTF-8"' > rootdir/etc/default/locale
-echo 'LC_ALL="zh_CN.UTF-8"' >> rootdir/etc/default/locale
 echo "#!/bin/bash
 exit 0" | tee rootdir/var/lib/dpkg/info/python3-defer.postinst
 chroot rootdir dpkg --configure python3-defer
 
 chroot rootdir apt install -y bash-completion sudo ssh nano gdm3 rmtfs qrtr-tools u-boot-tools- cloud-init- wireless-regdb- transmission*- remmina*- $1
-
-echo "[Daemon]
+# 安装中文语言包和输入法支持
+# 配置默认语言环境
+chroot rootdir sudo apt update
+chroot rootdir sudo apt install -y language-pack-zh-hans
+chroot rootdir sudo locale-gen zh_CN.UTF-8
+chroot rootdir echo 'LANG="zh_CN.UTF-8"' | sudo tee /etc/default/locale
 DeviceScale=2" | tee rootdir/etc/plymouth/plymouthd.conf
 
 echo "[org.gnome.desktop.interface]
