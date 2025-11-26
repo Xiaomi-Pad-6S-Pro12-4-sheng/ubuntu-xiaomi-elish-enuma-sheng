@@ -1,7 +1,5 @@
 #!/bin/sh
-#VERSION="24.04.3"
 VERSION="25.10"
-
 
 cd $2
 
@@ -9,7 +7,7 @@ truncate -s 5G rootfs.img
 mkfs.ext4 rootfs.img
 mkdir rootdir
 mount -o loop rootfs.img rootdir
-# 下载并解压 Ubuntu Base 25.10 镜像
+
 wget https://cdimage.ubuntu.com/ubuntu-base/releases/$VERSION/release/ubuntu-base-$VERSION-base-arm64.tar.gz
 tar xzvf ubuntu-base-$VERSION-base-arm64.tar.gz -C rootdir
 
@@ -21,9 +19,9 @@ mount -t tmpfs tmpfs rootdir/data/local/tmp
 mount --bind /sys rootdir/sys
 
 echo "nameserver 1.1.1.1" | tee rootdir/etc/resolv.conf
-echo "xiaomi-sheng" | tee rootdir/etc/hostname
+echo "MI-Pad6SPro" | tee rootdir/etc/hostname
 echo "127.0.0.1 localhost
-127.0.1.1 xiaomi-sheng" | tee rootdir/etc/hosts
+127.0.1.1 MI-Pad6SPro" | tee rootdir/etc/hosts
 
 export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:\$PATH
 export DEBIAN_FRONTEND=noninteractive
@@ -31,17 +29,17 @@ export DEBIAN_FRONTEND=noninteractive
 chroot rootdir apt update
 chroot rootdir apt upgrade -y
 chroot rootdir apt install -y python3-defer
+chroot rootdir sudo apt update
+chroot rootdir sudo apt install -y language-pack-zh-hans
+chroot rootdir sudo locale-gen zh_CN.UTF-8
+chroot rootdir echo 'LANG="zh_CN.UTF-8"' | sudo tee /etc/default/locale
 echo "#!/bin/bash
 exit 0" | tee rootdir/var/lib/dpkg/info/python3-defer.postinst
 chroot rootdir dpkg --configure python3-defer
 
 chroot rootdir apt install -y bash-completion sudo ssh nano gdm3 rmtfs qrtr-tools u-boot-tools- cloud-init- wireless-regdb- transmission*- remmina*- $1
-# 安装中文语言包和输入法支持
-# 配置默认语言环境
-chroot rootdir sudo apt update
-chroot rootdir sudo apt install -y language-pack-zh-hans
-chroot rootdir sudo locale-gen zh_CN.UTF-8
-chroot rootdir echo 'LANG="zh_CN.UTF-8"' | sudo tee /etc/default/locale
+
+echo "[Daemon]
 DeviceScale=2" | tee rootdir/etc/plymouth/plymouthd.conf
 
 echo "[org.gnome.desktop.interface]
