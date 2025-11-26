@@ -26,10 +26,10 @@ chroot rootdir sudo apt install -y language-pack-zh-hans language-pack-zh-hant
 chroot rootdir sudo locale-gen zh_CN.UTF-8 zh_TW.UTF-8
 chroot rootdir echo 'LANG="zh_CN.UTF-8"' | sudo tee /etc/default/locale
 chroot rootdir echo 'LANGUAGE="zh_CN:zh"' | sudo tee -a /etc/default/locale
+chroot rootdir sudo timedatectl set-timezone Asia/Shanghai
 chroot rootdir apt update
 chroot rootdir apt upgrade -y
 chroot rootdir apt install -y python3-defer
-chroot rootdir sudo timedatectl set-timezone Asia/Shanghai
 chroot rootdir dpkg -i alsa-xiaomi-sheng.deb
 chroot rootdir dpkg -i firmware-xiaomi-sheng.deb
 chroot rootdir dpkg -i device-xiaomi-sheng.deb
