@@ -32,8 +32,8 @@ chroot rootdir useradd -m -s /bin/bash admin
 chroot rootdir useradd -m -s /bin/bash root
 
 # Set password
-chroot rootdir /bin/bash -c "echo 'admin:147147' | chpasswd"
-chroot rootdir /bin/bash -c "echo 'root:root' | chpasswd"
+chroot rootdir /bin/bash -c "echo 'admin:admin' | chpasswd"
+chroot rootdir /bin/bash -c "echo 'root:admin' | chpasswd"
 
 # Tambah ke grup sudo
 chroot rootdir usermod -aG sudo admin
